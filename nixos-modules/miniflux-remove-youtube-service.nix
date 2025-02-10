@@ -4,38 +4,28 @@
   lib ? pkgs.lib,
   ...
 }:
-
-with lib;
-
-let
-
+with lib; let
   cfg = config.services.miniflux-remove-youtube;
-
-in
-
-{
-  ###### interface
+in {
   options = {
-
     services.miniflux-remove-youtube = rec {
-
       enable = mkOption {
-        type = types.bool;
+        type = types.str;
         default = false;
         description = ''
           Whether to run miniflux-remove-youtube service
         '';
       };
       miniflux-url = mkOption {
-        type = types.string;
+        type = types.str;
         default = "http://localhost:8080/";
         description = ''
           Url of the running miniflux instance
         '';
       };
       tokenfile-path = mkOption {
-        type = types.string;
-        default = "http://localhost:8080/";
+        type = types.str;
+        default = "";
         description = ''
           Path of the file containing the miniflux token
         '';
@@ -43,12 +33,8 @@ in
     };
   };
 
-  ###### implementation
-
   config = mkIf cfg.enable {
-
-    users.extraGroups.miniflux-remove-youtube = { };
-
+    users.extraGroups.miniflux-remove-youtube = {};
     users.extraUsers.miniflux-remove-youtube = {
       description = "miniflux-remove-youtube";
       group = "miniflux-remove-youtube";
@@ -56,10 +42,10 @@ in
       useDefaultShell = true;
     };
 
-    environment.systemPackages = [ pkgs.miniflux-remove-youtube ];
+    environment.systemPackages = [pkgs.miniflux-remove-youtube];
 
     systemd.timers."miniflux-remove-youtube" = {
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
       timerConfig = {
         OnBootSec = "5m";
         OnUnitActiveSec = "5m";
