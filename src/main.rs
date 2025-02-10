@@ -30,8 +30,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    // Update all the entries
-    mfx.update_entries_status(entries_to_update, miniflux_api::models::EntryStatus::Read, &client).await?;
+    if entries_to_update.len() != 0 {
+        // Update all the entries
+        mfx.update_entries_status(entries_to_update, miniflux_api::models::EntryStatus::Read, &client).await?;
+    } else {
+        println!("No entries to update");
+    }
 
     Ok(())
 }
