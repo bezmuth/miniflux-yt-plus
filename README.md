@@ -39,7 +39,7 @@ You can find my NixOS config using this module here: https://github.com/bezmuth/
 ## FAQ
 ### "I don't use NixOS!"
 This is just a rust program, clone this repo and you should be able to run `cargo install`. The first argument to the program is your miniflux url and the second is a path to file containing the api token. Create a cron job and you're off to the races.
-### "/X/ thing doesn't work!"
+### "*X* thing doesn't work!"
 This isn't really "production ready" code, there's very little error handling outside of a `panic!()`. If you run into any issues you can't fix yourself just file an issue.
 ### "My entire business imploded because of your bad code!"
 womp womp
