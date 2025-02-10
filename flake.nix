@@ -18,6 +18,7 @@
           overlays = [ rust-overlay.overlays.default self.overlays.default ];
         };
       });
+      pkgsFor = nixpkgs.legacyPackages;
     in
     {
       overlays.default = final: prev: {
@@ -33,7 +34,12 @@
             rust.stable.latest.default.override {
               extensions = [ "rust-src" "rustfmt" ];
             };
+        miniflux-remove-youtube = final.callPackage ./. { };
       };
+      packages = forEachSupportedSystem ({pkgs}: {
+        default = pkgs.miniflux-remove-youtube;
+      });
+      nixosModules = import ./nixos-modules { overlays = [self.overlays.default]; };
 
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {

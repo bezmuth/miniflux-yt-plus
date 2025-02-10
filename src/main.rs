@@ -1,11 +1,16 @@
 use miniflux_api::MinifluxApi;
 use url::Url;
 use reqwest::Client;
+use std::{env, fs};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let api_token = "";
-    let url = Url::parse("http://localhost:10002/")?;
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 3 {
+        panic!("Please provide the url and filepath to the api token for the miniflux instance")
+    }
+    let api_token = fs::read_to_string(args[2].clone())?.replace("\n", "");
+    let url = Url::parse(&args[1])?;
     let client = Client::new();
 
     let mfx = MinifluxApi::new_from_token(&url, api_token.to_string());
