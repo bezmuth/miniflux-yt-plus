@@ -1,5 +1,7 @@
 {
-  description = "A Nix-flake-based Rust development environment";
+  # initial flake from: https://github.com/the-nix-way/dev-templates
+  # module config adapted from: https://seanrmurphy.medium.com/adding-a-package-and-service-to-nixos-using-flakes-460fe930de1c
+  description = "Miniflix-remove-youtube dev environment and nixos-module";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
@@ -37,11 +39,14 @@
           rust.stable.latest.default.override {
             extensions = ["rust-src" "rustfmt"];
           };
+      # Add miniflux-remove-youtube to the overlay
       miniflux-remove-youtube = final.callPackage ./. {};
     };
+    # make it the default package
     packages = forEachSupportedSystem ({pkgs}: {
       default = pkgs.miniflux-remove-youtube;
     });
+    # ensure we export the module
     nixosModules = import ./nixos-modules {overlays = [self.overlays.default];};
 
     devShells = forEachSupportedSystem ({pkgs}: {
