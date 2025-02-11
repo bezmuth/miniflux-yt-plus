@@ -28,8 +28,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // get all the unread feeds
         for entry in mfx.get_feed_entries(feed.id, Some(miniflux_api::models::EntryStatus::Unread), None, None, None, None, None, None, None, None, None, &client ).await? {
             // check if its a short
-            if entry.reading_time == 1 {
-                // add the entry id to our update list
+            let video_id = &entry.url[31..];
+            let short_check_url = format!("https://www.youtube.com/shorts/{}", video_id);
+            dbg!(short_check_url.clone());
+            if !client.head(short_check_url).send().await?.status().is_redirection(){
                 entries_to_update.push(entry.id)
             }
         }
