@@ -10,7 +10,7 @@ in {
   options = {
     services.miniflux-remove-youtube = rec {
       enable = mkOption {
-        type = types.str;
+        type = types.bool;
         default = false;
         description = ''
           Whether to run miniflux-remove-youtube service
