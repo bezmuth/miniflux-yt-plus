@@ -11,7 +11,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let api_token = fs::read_to_string(args[2].clone())?.replace("\n", "");
     let url = Url::parse(&args[1])?;
-    let client = Client::new();
+    let client = Client::builder()
+        .redirect(reqwest::redirect::Policy::none()) // disable redirects so we can check if the video is a short
+        .build()?;
 
     let mfx = MinifluxApi::new_from_token(&url, api_token.to_string());
 
@@ -27,10 +29,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     for feed in yt_feeds{
         // get all the unread feeds
         for entry in mfx.get_feed_entries(feed.id, Some(miniflux_api::models::EntryStatus::Unread), None, None, None, None, None, None, None, None, None, &client ).await? {
-            // check if its a short
-            let video_id = &entry.url[31..];
+            let video_id = &entry.url[32..];
             let short_check_url = format!("https://www.youtube.com/shorts/{}", video_id);
-            dbg!(short_check_url.clone());
+            // make a request to the url, if this video isn't a short it will redirect
             if !client.head(short_check_url).send().await?.status().is_redirection(){
                 entries_to_update.push(entry.id)
             }

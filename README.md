@@ -1,6 +1,7 @@
 # Automated service to remove youtube shorts from miniflux
-A simple (slightly scuffed) NixOS module to periodically (every 5 minutes) mark videos under one minute as read on miniflux. This applies to both shorts and livestreams. 
-Ensure `FETCH_YOUTUBE_WATCH_TIME` is enabled in your miniflux config.
+A simple (slightly scuffed) NixOS module to periodically (every 5 minutes) mark youtube shorts as read. This applies to both shorts and livestreams. 
+
+Short detection is done by making a request to https://www.youtube.com/shorts/<videoid> and checking for a redirect. Youtube shorts do not redirect.
 ## Installation (NixOS)
 Add this repo to your flake inputs and ensure the module is loaded:
 ```nix
