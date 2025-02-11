@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "miniflux-remove-youtube";
-  version = "0.1";
+  version = "0.2";
   cargoLock.lockFile = ./Cargo.lock;
   nativeBuildInputs = [
     pkgs.pkg-config
