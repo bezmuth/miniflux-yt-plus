@@ -93,7 +93,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    if entries_to_update.is_empty() {
+    if !entries_to_update.is_empty() {
         // Update all the entries
         mfx.update_entries_status(
             entries_to_update,

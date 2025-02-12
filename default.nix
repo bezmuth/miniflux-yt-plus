@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "miniflux-yt-plus";
-  version = "0.4";
+  version = "0.4.1";
   cargoLock.lockFile = ./Cargo.lock;
   nativeBuildInputs = [
     pkgs.pkg-config
