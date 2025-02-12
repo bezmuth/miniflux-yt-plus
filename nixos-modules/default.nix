@@ -1,5 +1,5 @@
 {overlays}: {
-  miniflux-remove-youtube = import ./miniflux-remove-youtube-service.nix;
+  miniflux-yt-plus = import ./miniflux-yt-plus-service.nix;
 
   overlayNixpkgsForThisInstance = {pkgs, ...}: {
     nixpkgs = {
