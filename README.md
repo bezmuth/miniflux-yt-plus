@@ -41,7 +41,7 @@ Ensure that whatever file you store the token in can be read by the "miniflux-yt
 You can find my NixOS config using this module here: https://github.com/bezmuth/nix-config/blob/822cf2e6b2e6672f441c4a31a36aa3ff223545f9/modules/miniflux/default.nix
 ## FAQ
 ### "I don't use NixOS!"
-This is just a rust program, clone this repo and you should be able to run `cargo install`. Run `miniflux-yt-plus --help` to see all the arguemnts and then create a cron job.
+This is just a rust program, clone this repo and you should be able to run `cargo install`. Run `miniflux-yt-plus --help` to see all the arguments and then create a cron job.
 ### "*X* thing doesn't work!"
 This isn't really "production ready" code, there's very little error handling outside of a `panic!()`. If you run into any issues you can't fix yourself just file an issue.
 ### "My entire business imploded because of your bad code!"
