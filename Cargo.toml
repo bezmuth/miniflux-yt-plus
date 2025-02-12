@@ -6,8 +6,6 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.29", features = ["derive", "wrap_help"] }
 miniflux_api = "0.7.2"
-regex = "1.11.1"
 reqwest = "0.12.12"
-scraper = "0.22.0"
 tokio = { version = "1", features = ["full"] }
 url = "2.5.4"
