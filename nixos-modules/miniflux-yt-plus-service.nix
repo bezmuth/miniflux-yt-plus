@@ -44,7 +44,6 @@ in {
           Remove livestreams or not
         '';
       };
-
     };
   };
 
@@ -70,7 +69,15 @@ in {
 
     systemd.services.miniflux-yt-plus = {
       serviceConfig = {
-        ExecStart = "${pkgs.miniflux-yt-plus}/bin/miniflux-yt-plus ${cfg.miniflux-url} ${cfg.tokenfile-path} ${if cfg.remove-shorts then "-s" else ""} ${if cfg.remove-livestreams then "-l" else ""}";
+        ExecStart = "${pkgs.miniflux-yt-plus}/bin/miniflux-yt-plus ${cfg.miniflux-url} ${cfg.tokenfile-path} ${
+          if cfg.remove-shorts
+          then "-s"
+          else ""
+        } ${
+          if cfg.remove-livestreams
+          then "-l"
+          else ""
+        }";
         Type = "oneshot";
         User = "miniflux-yt-plus";
       };

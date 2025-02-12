@@ -49,6 +49,8 @@
     # ensure we export the module
     nixosModules = import ./nixos-modules {overlays = [self.overlays.default];};
 
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
