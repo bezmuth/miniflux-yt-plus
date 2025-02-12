@@ -8,7 +8,7 @@ Add this repo to your flake inputs and ensure the module is loaded:
 {
   inputs = {
     # ...
-    miniflux-yt-plus.url = "github:bezmuth/miniflux-remove-yt-shorts";
+    miniflux-yt-plus.url = "github:bezmuth/miniflux-yt-plus";
   };
   outputs = { miniflux-yt-plus, ... }: {
     nixosConfigurations.<host> = nixpkgs.lib.nixosSystem {
