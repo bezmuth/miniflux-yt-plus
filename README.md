@@ -1,3 +1,4 @@
+See: https://github.com/orgs/miniflux/discussions/1827#discussioncomment-12646018 for a better solution
 # Automated service to remove youtube shorts from miniflux
 A simple (slightly scuffed) NixOS module to periodically (every 5 minutes) mark youtube shorts and livestreams as read.
 
